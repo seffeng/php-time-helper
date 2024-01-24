@@ -17,10 +17,7 @@ Trait TimeTrait
     public static function getWeekRangeTime(int $year)
     {
         $time = strtotime(date($year .'-01-01'));
-        $weekDay = date('w', $time);
-        if ($weekDay == 0) {
-            $weekDay = 7;
-        }
+        $weekDay = date('N', $time);
         $data = [];
         for ($i = 1; ; $i++) {
             $startTime = strtotime('-'. ($weekDay - 1) .' days', $time);
@@ -37,10 +34,7 @@ Trait TimeTrait
             if ($i > 1 && date('Y', $endTime) > $startYear) {
                 break;
             }
-            $weekDay = date('w', $startTime);
-            if ($weekDay == 0) {
-                $weekDay = 7;
-            }
+            $weekDay = date('N', $startTime);
         }
         return $data;
     }
